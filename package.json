@@ -1,0 +1,6 @@
+{ "name" : "ircretary"
+, "version" : "0.0.0"
+, "main" : "ircretary"
+, "dependencies" : { "irc" : "*" }
+, "scripts" : { "start" : "node server.js" }
+}
