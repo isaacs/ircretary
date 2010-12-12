@@ -248,8 +248,9 @@ function brains (m) {
     default: return
   }
 }
-var http = require("http")
+var http
 function saveToCouch (message) {
+  http = http || require("http")
   var m = {}
   Object.keys(message).forEach(function (k, i, l) {
     m[k] = message[k]
@@ -289,7 +290,7 @@ function handleError (e) { console.error("Error: "+(e.stack || e.message)) }
 
 function handleJoin (m) {
   var where = m.where = m.args[0]
-  m.what = "join " + m.args[1]
+  m.what = "join"
   saveToCouch(m)
   lastSeen.call(this, m.nick, null, "joining", where)
   if (where.toLowerCase() in this.redirects) {
@@ -302,10 +303,12 @@ function handleJoin (m) {
     "I have notes for you. Reply with 'notes' if you would like them.")
 }
 function handleQuit (m) {
-  var where = m.where = m.args[0]
-  m.what = "quit " + m.args[1]
+  var where = m.where = (this.lastSeen[m.nick] || {}).where
+  if (!where) return // some unknown character?
+  m.what = m.args[0]
   saveToCouch(m)
-  lastSeen.call(this, m.nick, null, "quitting", where)
+  lastSeen.call(this, m.nick, null, "quitting"
+                + (m.what ? ": "+m.what:""), where)
 }
 
 
