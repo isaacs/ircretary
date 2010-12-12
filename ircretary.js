@@ -7,7 +7,7 @@ var irc = require("./node_modules/irc")
   , options = { server : "irc.freenode.net"
               , nick : nick
               , channels : ["#node.js", "#isaacs-testing", "#node", "#nodejs"
-                           ,"#couchdb", "#joyent"]
+                           ,"#joyent"]
               , userName : "ircretary"
               , realName : "ircretary"
               }
