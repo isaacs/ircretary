@@ -224,6 +224,7 @@ Object.defineProperty(commands, "unknown",
   })
 
 function respond (who, where, msg) {
+  if (who === this.nick) return
   if (msg.indexOf("\n") !== -1) where = who
   if (who !== where) msg = who + ": "+msg
   msg = msg.split("\n")
@@ -299,7 +300,7 @@ function handleJoin (m) {
       +this.redirects[where.toLowerCase()] +"` instead.")
   }
   var notes = this.notes[m.nick]
-  if (notes && notes.length) this.say(m.nick,
+  if (notes && notes.length) respond.call(this, m.nick, m.nick,
     "I have notes for you. Reply with 'notes' if you would like them.")
 }
 function handleQuit (m) {
