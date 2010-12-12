@@ -288,20 +288,24 @@ function couchWrite (m) {
 function handleError (e) { console.error("Error: "+(e.stack || e.message)) }
 
 function handleJoin (m) {
+  var where = m.where = m.args[0]
+  m.what = "join " + m.args[1]
   saveToCouch(m)
-  lastSeen.call(this, m.nick, null, "joining", m.args[0])
-  if (m.args[0].toLowerCase() in this.redirects) {
-    respond.call(this, m.nick, m.args[0],
+  lastSeen.call(this, m.nick, null, "joining", where)
+  if (where.toLowerCase() in this.redirects) {
+    respond.call(this, m.nick, where,
       "You're in the wrong room.  You should `/join "
-      +this.redirects[m.args[0].toLowerCase()] +"` instead.")
+      +this.redirects[where.toLowerCase()] +"` instead.")
   }
   var notes = this.notes[m.nick]
   if (notes && notes.length) this.say(m.nick,
     "I have notes for you. Reply with 'notes' if you would like them.")
 }
 function handleQuit (m) {
+  var where = m.where = m.args[0]
+  m.what = "quit " + m.args[1]
   saveToCouch(m)
-  lastSeen.call(this, m.nick, null, "quitting", m.args[0])
+  lastSeen.call(this, m.nick, null, "quitting", where)
 }
 
 
