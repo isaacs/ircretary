@@ -303,11 +303,13 @@ function handleJoin (m) {
     "I have notes for you. Reply with 'notes' if you would like them.")
 }
 function handleQuit (m) {
-  var where = m.where = (this.lastSeen[m.nick] || {}).where
+  var where = m.where = m.rawCommand === "PART" ? m.args[0]
+                      : (this.lastSeen[m.nick] || {}).where
   if (!where) return // some unknown character?
-  m.what = m.args[0]
+  m.what = m.rawCommand === "PART" ? ( m.args[1] || "left" )
+         : m.args[0] || "quit"
   saveToCouch(m)
-  lastSeen.call(this, m.nick, null, "quitting"
+  lastSeen.call(this, m.nick, null, "quit"
                 + (m.what ? ": "+m.what:""), where)
 }
 
