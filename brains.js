@@ -222,11 +222,16 @@ Object.defineProperty(commands, "unknown",
                   )
     }
   })
-
+var lastResponse = {}
 function respond (who, where, msg) {
   if (who === this.nick) return
   if (msg.indexOf("\n") !== -1) where = who
   if (who !== where) msg = who + ": "+msg
+  if (lastResponse[who] === where+msg) return
+  lastResponse[who] = where+msg
+  setTimeout(function () {
+    if (lastResponse[who] === where+msg) delete lastResponse[who]
+  }, 10000)
   msg = msg.split("\n")
   var self = this
     , timeout = 200
