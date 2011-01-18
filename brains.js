@@ -256,6 +256,7 @@ function brains (m) {
 }
 var http
 function saveToCouch (message) {
+  return
   http = http || require("http")
   var m = {}
   Object.keys(message).forEach(function (k, i, l) {
@@ -272,6 +273,7 @@ function saveToCouch (message) {
   couchWrite({_id:m.where.replace(/^#/, ''),type:"room"})
 }
 function couchWrite (m) {
+  return
   //console.log("Couch Wrote: "+m._id)
   var c = http.createClient(5984, process.env.COUCHSERVER)
     , auth = process.env.COUCHAUTH
