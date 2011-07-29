@@ -13,6 +13,12 @@ commands.hi = commands.hello = function (m, who, what, where) {
   respond.call(this, who, where, "Hello :)")
 }
 
+commands.inst = commands.install = function (m, who, what, where, words) {
+  var tellWho = words[1] || ""
+  respond.call(this, where, tellWho,
+               "curl http://npmjs.org/install.sh | sh")
+}
+
 commands.log = commands.logs = function (m, who, what, where) {
   var u = process.env.LOGURL
   if (u.substr(-1) !== "/") {
@@ -226,12 +232,15 @@ var lastResponse = {}
 function respond (who, where, msg) {
   if (who === this.nick) return
   if (msg.indexOf("\n") !== -1) where = who
-  if (who !== where) msg = who + ": "+msg
-  if (lastResponse[who] === where+msg) return
-  lastResponse[who] = where+msg
-  setTimeout(function () {
-    if (lastResponse[who] === where+msg) delete lastResponse[who]
-  }, 10000)
+  if (!where) return
+  if (who) {
+    if (who !== where) msg = who + ": "+msg
+    if (lastResponse[who] === where+msg) return
+    lastResponse[who] = where+msg
+    setTimeout(function () {
+      if (lastResponse[who] === where+msg) delete lastResponse[who]
+    }, 10000)
+  }
   msg = msg.split("\n")
   var self = this
     , timeout = 200
