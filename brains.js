@@ -16,7 +16,9 @@ commands.hi = commands.hello = function (m, who, what, where) {
 commands.inst = commands.install = function (m, who, what, where, words) {
   var tellWho = words[1] || ""
   respond.call(this, tellWho, where,
-               "curl http://npmjs.org/install.sh | sh")
+               "`curl http://npmjs.org/install.sh | sh` "+
+               "(or, if there are permission issues, you can try: "+
+               "`curl http://npmjs.org/install.sh | sudo sh`)")
 }
 
 commands.log = commands.logs = function (m, who, what, where) {
