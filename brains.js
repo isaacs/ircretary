@@ -15,7 +15,7 @@ commands.hi = commands.hello = function (m, who, what, where) {
 
 commands.inst = commands.install = function (m, who, what, where, words) {
   var tellWho = words[1] || ""
-  respond.call(this, where, tellWho,
+  respond.call(this, tellWho, where,
                "curl http://npmjs.org/install.sh | sh")
 }
 
