@@ -35,12 +35,15 @@ client.on("raw", function (m) {
   client.atMe = client.atMe || new RegExp("^"+client.nick+"\\b")
   client.brains(m)
 })
+
 client.on("error", function (m) {
   console.error(["error", m])
 })
+
 process.on("uncaughtException", reload)
 // keep behavior in sync if the file changes.
 client.brains = require("./brains")
+brains.reload = reload
 var hadError = null
 function reload (ex) {
   delete module.moduleCache[ path.join(__dirname, "brains.js") ]

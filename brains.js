@@ -254,6 +254,16 @@ function respond (who, where, msg) {
   })()
 }
 
+commands.bomb = function (m, who, what, where, words) {
+  if (! ~this.admins.indexOf(who) ) return respond.call(this, who, where,
+    "Sorry, that requires admin access.")
+  respond.call(this, who, where, "Launching all missiles")
+}
+
+commands.reload = function (m, who, what, where, words) {
+  brains.reload && brains.reload()
+}
+
 function brains (m) {
   setTimeout(MEMO.bind(this), 6000)
   switch (m.command.toUpperCase()) {
