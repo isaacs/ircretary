@@ -7,7 +7,7 @@ var irc = require("./node_modules/irc")
   , options = { server : "irc.freenode.net"
               , nick : nick
               , channels : ["#node.js", "#isaacs-testing", "#node", "#nodejs"
-                           ,"#joyent", "#libuv"]
+                           ,"#joyent", "#libuv", "#travis", "#travis-ci"]
               , userName : "ircretary"
               , realName : "ircretary"
               }
@@ -23,7 +23,9 @@ client.lastSeen = {}
 client.redirects =
   {"#nodejs" : "#node.js"
   ,"#node" : "#node.js"
+  ,"#travis-ci": "#travis"
   }
+
 try {
   var mem = JSON.parse(""+fs.readFileSync(process.env.HOME+"/memory.json"))
   ;["notes","watches","admins","lastSeen","redirects"].forEach(function (m) {
