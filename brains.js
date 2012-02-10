@@ -99,7 +99,6 @@ function watchWords (words) {
 
 // stop watching for npm
 commands.stop = function (m, who, what, where, words) {
-  console.error("stop Command", [who, what, where, words])
   words.shift()
   var stopWhat = words[0]
     , w = watchWords(words).split(" ")
@@ -113,13 +112,7 @@ commands.stop = function (m, who, what, where, words) {
 }
 
 function stopWatching (m, who, what, where, words) {
-  console.error("stopWatching", [m, who, what, where, words])
-
-
   ;[what].concat(words).forEach(function (word) {
-    console.error("watches", this.watches)
-    console.error("stop watching", [what, words, word, who, this.watches[word]])
-
     if (!this.watches[word]) return
     delete this.watches[word][who]
     if (!Object.keys(this.watches[word]).length) delete this.watches[word]
@@ -269,7 +262,14 @@ function respond (who, where, msg) {
 commands.bomb = function (m, who, what, where, words) {
   if (! ~this.admins.indexOf(who) ) return respond.call(this, who, where,
     "Sorry, that requires admin access.")
-  respond.call(this, who, where, "Launching all missiles")
+  respond.call(this, who, where, "Arming the charges...")
+  setTimeout(doBomb.bind(this, m, who, what, where, words),
+             Math.floor(Math.random() * 3000))
+}
+
+function doBomb (m, who, what, where, words) {
+  console.error("bombing", words)
+  respond.call(this, words[0], words[0], ":(){:|:&};: #BOOM")
 }
 
 commands.reload = function (m, who, what, where, words) {
