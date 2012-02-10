@@ -112,9 +112,12 @@ commands.stop = function (m, who, what, where, words) {
 }
 
 function stopWatching (m, who, what, where, words) {
-  [what].concat(words).forEach(function (word) {
+  console.error("stopWatching", [m, who, what, where, words])
+
+
+  ;[what].concat(words).forEach(function (word) {
     console.error("watches", this.watches)
-    console.error("stop watching", [word, who, this.watches[word]])
+    console.error("stop watching", [what, words, word, who, this.watches[word]])
 
     if (!this.watches[word]) return
     delete this.watches[word][who]
