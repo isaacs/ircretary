@@ -101,8 +101,8 @@ function watchWords (words) {
 commands.stop = function (m, who, what, where, words) {
   console.error("stop Command", [who, what, where, words])
   words.shift()
-  var stopWhat = words.shift()
-    , w = watchWords(words.join(" ")).split(" ")
+  var stopWhat = words[0]
+    , w = watchWords(words).split(" ")
 
   switch (stopWhat) {
     case "watching":
