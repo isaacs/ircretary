@@ -118,7 +118,8 @@ function stopWatching (m, who, what, where, words) {
     }, this)
     if (!Object.keys(this.watches[who]).length) delete this.watches[who]
   }
-  respond.call(this, who, where, "Done.")
+  respond.call(this, who, where, "Done. ")
+  respond.call(this, who, who, "Watching: "+JSON.stringify(this.watches[who]))
 }
 // tell isaacs that I need to talk to him.
 commands.tell = function (m, who, what, where, words) {
