@@ -105,7 +105,7 @@ commands.stop = function (m, who, what, where, words) {
   switch (stopWhat) {
     case "watching":
       return stopWatching.call(this,
-        m, who, what, where, watchWords(words).split(" "))
+        m, who, what, where, w.split(" "))
     default: return respond.call(this, who, where,
       "What should I stop doing?")
   }
