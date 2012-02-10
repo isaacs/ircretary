@@ -102,11 +102,11 @@ commands.stop = function (m, who, what, where, words) {
   console.error("stop Command", [who, what, where, words])
   words.shift()
   var stopWhat = words.shift()
-    , w = watchWords(words)
+    , w = watchWords(words.join(" ")).split(" ")
+
   switch (stopWhat) {
     case "watching":
-      return stopWatching.call(this,
-        m, who, what, where, w.split(" "))
+      return stopWatching.call(this, m, who, what, where, w)
     default: return respond.call(this, who, where,
       "What should I stop doing?")
   }
