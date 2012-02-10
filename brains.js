@@ -119,7 +119,7 @@ function stopWatching (m, who, what, where, words) {
     if (!Object.keys(this.watches[word]).length) delete this.watches[word]
   }
   respond.call(this, who, where, "Done. ")
-  return respond.call(this, who, who,
+  respond.call(this, who, who,
     "Watching for all mentions of: "+
     (Object.keys(this.watches).filter(function (w) {
       return this.watches[w][who]
