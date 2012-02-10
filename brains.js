@@ -113,7 +113,7 @@ commands.stop = function (m, who, what, where, words) {
 
 function stopWatching (m, who, what, where, words) {
   words.forEach(function (word) {
-    if (!this.watchesp[word]) return
+    if (!this.watches[word]) return
     delete this.watches[word][who]
     if (!Object.keys(this.watches[word]).length) delete this.watches[word]
   }, this)
