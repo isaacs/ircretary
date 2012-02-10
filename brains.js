@@ -99,6 +99,7 @@ function watchWords (words) {
 
 // stop watching for npm
 commands.stop = function (m, who, what, where, words) {
+  console.error("stop Command", [who, what, where, words])
   words.shift()
   var stopWhat = words.shift()
     , w = watchWords(words)
