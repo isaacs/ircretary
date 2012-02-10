@@ -114,12 +114,16 @@ commands.stop = function (m, who, what, where, words) {
 function stopWatching (m, who, what, where, words) {
   if (this.watches[who]) {
     words.forEach(function (word) {
-      if (this.watches[who]) delete this.watches[who][word]
+      if (this.watches[who]) delete this.watches[word][who]
     }, this)
-    if (!Object.keys(this.watches[who]).length) delete this.watches[who]
+    if (!Object.keys(this.watches[word]).length) delete this.watches[word]
   }
   respond.call(this, who, where, "Done. ")
-  respond.call(this, who, who, "Watching: "+JSON.stringify(this.watches[who]))
+  return respond.call(this, who, who,
+    "Watching for all mentions of: "+
+    (Object.keys(this.watches).filter(function (w) {
+      return this.watches[w][who]
+    }, this)).join(" "))
 }
 // tell isaacs that I need to talk to him.
 commands.tell = function (m, who, what, where, words) {
