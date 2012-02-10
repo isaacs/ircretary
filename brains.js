@@ -112,12 +112,11 @@ commands.stop = function (m, who, what, where, words) {
 }
 
 function stopWatching (m, who, what, where, words) {
-  if (this.watches[who]) {
-    words.forEach(function (word) {
-      if (this.watches[who]) delete this.watches[word][who]
-    }, this)
+  words.forEach(function (word) {
+    if (!this.watchesp[word]) return
+    delete this.watches[word][who]
     if (!Object.keys(this.watches[word]).length) delete this.watches[word]
-  }
+  }, this)
   respond.call(this, who, where, "Done. ")
   respond.call(this, who, who,
     "Watching for all mentions of: "+
