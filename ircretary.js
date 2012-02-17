@@ -9,7 +9,7 @@ var irc = require("./node_modules/irc")
               , channels : ["#node.js", "#isaacs-testing", "#node", "#nodejs"
                            ,"#joyent", "#libuv", "#travis", "#travis-ci"
                            ,"#nodejitsu", "#stackvm"
-                           ,"#thenodefirm"]
+                           ,"#thenodefirm", "#nerdtracker"]
               , userName : "ircretary"
               , realName : "ircretary"
               }
