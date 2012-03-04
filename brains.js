@@ -267,7 +267,7 @@ commands.say = function (m, who, what, where, words) {
   if (!words.length)
     return respond.call(this, who, who, "Say where? (#channel or username)")
 
-  respond.call(this, who, who, JSON.stringify(words))
+  respond.call(this, who, who, JSON.stringify(m))
 }
 
 commands.bomb = function (m, who, what, where, words) {
