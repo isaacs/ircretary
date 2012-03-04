@@ -208,7 +208,7 @@ commands.where = commands.when = function (m, who, what, where, words) {
   respond.call(this, who, where, "I'm not sure I follow your meaning...")
 }
 function lastSeen (who, where, verb, what) {
-  this.lastSeen[who] =
+  this.lastSeen[who.toLowerCase()] =
     { verb : verb
     , what : what
     , where : where
@@ -216,7 +216,7 @@ function lastSeen (who, where, verb, what) {
     }
 }
 function reportLastSeen (who, where, nick) {
-  var ls = this.lastSeen[nick]
+  var ls = this.lastSeen[nick.toLowerCase()]
   if (!ls) return respond.call(this, who, where, "Haven't seen "+nick+", sorry")
   var msg = nick + " was last seen at "+ls.time + ", "
   if (ls.where) msg += "in "+ls.where+" "
