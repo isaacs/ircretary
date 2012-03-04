@@ -267,7 +267,10 @@ commands.say = function (m, who, what, where, words) {
   if (!words.length)
     return respond.call(this, who, who, "Say where? (#channel or username)")
 
-  respond.call(this, who, who, JSON.stringify(m))
+  // the thing to say is everything after the first two words.
+  var msg = m.what
+
+  respond.call(this, who, who, msg)
 }
 
 commands.bomb = function (m, who, what, where, words) {
@@ -384,6 +387,7 @@ function handleMsg (m) {
   if (atMe) {
     what = what.substr(this.nick.length).replace(/^[^a-zA-Z0-9]+/, '')
   }
+  m.what = what
   var words = what.toLowerCase()
                   .replace(/['"“”‘’]/g, "")
                   .replace(/\s+/g, " ")
