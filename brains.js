@@ -259,11 +259,22 @@ function respond (who, where, msg) {
   })()
 }
 
+commands.say = function (m, who, what, where, words) {
+  if (! ~this.admins.indexOf(who) ) return respond.call(this, who, where,
+    "Sorry, that requires admin access.")
+  words.shift()
+
+  if (!words.length)
+    return respond.call(this, who, who, "Say where? (#channel or username)")
+
+  respond.call(this, who, who, JSON.stringify(words))
+}
+
 commands.bomb = function (m, who, what, where, words) {
   if (! ~this.admins.indexOf(who) ) return respond.call(this, who, where,
     "Sorry, that requires admin access.")
   words.shift()
-  if (!words.length) respond.call(
+  if (!words.length) return respond.call(
     this, who, where, "What do you want me to bomb?")
   respond.call(this, who, where, "Arming the charges...")
   setTimeout(doBomb.bind(this, m, who, what, where, words),
