@@ -269,8 +269,10 @@ commands.say = function (m, who, what, where, words) {
 
   // the thing to say is everything after the first two words.
   var msg = m.what.replace(/^\s*say\s*/i, "")
+  var mt = m.split(/[\s\t]*/)[0]
+  msg = msg.substr(mt.length).trim()
 
-  respond.call(this, who, who, msg)
+  respond.call(this, who, who, [mt, msg])
 }
 
 commands.bomb = function (m, who, what, where, words) {
