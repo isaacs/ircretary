@@ -272,7 +272,7 @@ commands.say = function (m, who, what, where, words) {
   var mt = m.split(/[\s\t]*/)[0]
   msg = msg.substr(mt.length).trim()
 
-  respond.call(this, who, who, [mt, msg])
+  respond.call(this, who, who, JSON.stringify([mt, msg]))
 }
 
 commands.bomb = function (m, who, what, where, words) {
