@@ -248,6 +248,10 @@ function respond (who, where, msg) {
       if (lastResponse[who] === where+msg) delete lastResponse[who]
     }, 10000)
   }
+  sayNice.call(this, where, msg)
+}
+
+function sayNice (where, msg) {
   msg = msg.split("\n")
   var self = this
     , timeout = 200
@@ -271,9 +275,8 @@ commands.say = function (m, who, what, where, words) {
   var msg = m.what.replace(/^\s*say\s*/i, "")
   var mt = msg.trim().split(/[\s\t]+/)[0]
   msg = msg.substr(mt.length).trim()
-  console.error("say", [mt, msg])
 
-  respond.call(this, who, who, JSON.stringify([mt, msg]))
+  sayNice.call(this, mt, msg)
 }
 
 commands.bomb = function (m, who, what, where, words) {
