@@ -271,6 +271,7 @@ commands.say = function (m, who, what, where, words) {
   var msg = m.what.replace(/^\s*say\s*/i, "")
   var mt = m.split(/[\s\t]*/)[0]
   msg = msg.substr(mt.length).trim()
+  console.error("say", [mt, msg])
 
   respond.call(this, who, who, JSON.stringify([mt, msg]))
 }
