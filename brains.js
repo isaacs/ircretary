@@ -268,7 +268,7 @@ commands.say = function (m, who, what, where, words) {
     return respond.call(this, who, who, "Say where? (#channel or username)")
 
   // the thing to say is everything after the first two words.
-  var msg = m.what
+  var msg = m.what.replace(/^\s*say\s*/i, "")
 
   respond.call(this, who, who, msg)
 }
