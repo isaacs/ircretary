@@ -413,18 +413,20 @@ function handleMsg (m) {
   }
   // see if there are any words we care about.
   var w = {}
-  words.forEach(function (word) {
-    if (this.watches[word]) {
-      Object.keys(this.watches[word])
-        .filter(function (watcher) { return watcher !== who })
-        .forEach(function (watcher) {
-          w[watcher] = true
-        })
-    }
-  }, this)
-  Object.keys(w).forEach(function (watcher) {
-    leaveNote.call(this, watcher, who, what, where)
-  }, this)
+  if (where !== who) {
+    words.forEach(function (word) {
+      if (this.watches[word]) {
+        Object.keys(this.watches[word])
+          .filter(function (watcher) { return watcher !== who })
+          .forEach(function (watcher) {
+            w[watcher] = true
+          })
+      }
+    }, this)
+    Object.keys(w).forEach(function (watcher) {
+      leaveNote.call(this, watcher, who, what, where)
+    }, this)
+  }
 
   // if not a PM, and not at me, then ignore.
   if (where !== who && !atMe) {
