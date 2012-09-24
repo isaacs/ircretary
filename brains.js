@@ -129,6 +129,8 @@ function stopWatching (m, who, what, where, words) {
 commands.tell = function (m, who, what, where, words) {
   var tellWho = words[1]
     , msg
+  if (tellWho.match(/[<>]/) || !tellWho)
+    return respond.call(this, who, where, "That's not a valid username.")
   leaveNote.call(this, tellWho, who, what, where)
   msg = "I'll be sure to tell "+tellWho
   respond.call(this, who, where, msg)
