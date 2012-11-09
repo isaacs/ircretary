@@ -44,6 +44,12 @@ commands.thanks = commands.thank = function (m, who, what, where, words) {
   }
 }
 
+commands.ask = function (m, who, what, where, words) {
+  var tellWho = words[1]
+  leaveNote.call(this, tellWho, who, what, where)
+  respond.call(this, who, where, "I'll tell "+tellWho+" you asked.")
+}
+
 commands.obey = function (m, who, what, where, words) {
   if (! ~this.admins.indexOf(who) ) return respond.call(this, who, where,
     "Sorry, that requires admin access.")
@@ -210,6 +216,7 @@ commands.where = commands.when = function (m, who, what, where, words) {
   respond.call(this, who, where, "I'm not sure I follow your meaning...")
 }
 function lastSeen (who, where, verb, what) {
+  if (!who) return
   this.lastSeen[who.toLowerCase()] =
     { verb : verb
     , what : what
