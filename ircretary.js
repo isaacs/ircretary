@@ -26,7 +26,6 @@ client.redirects =
   {"#nodejs" : "#node.js"
   ,"#node" : "#node.js"
   ,"#travis-ci": "#travis"
-  ,"#npm":"#node.js"
   }
 
 try {
