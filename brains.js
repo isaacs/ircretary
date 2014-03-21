@@ -368,8 +368,8 @@ function handleJoin (m) {
   lastSeen.call(this, m.nick, null, "joining", where)
   if (where.toLowerCase() in this.redirects) {
     respond.call(this, m.nick, where,
-      "You're in the wrong room.  You should `/join "
-      +this.redirects[where.toLowerCase()] +"` instead.")
+      "You're in the wrong room.  You should /join "
+      +this.redirects[where.toLowerCase()])
   }
   var notes = this.notes[m.nick]
   if (notes && notes.length) respond.call(this, m.nick, m.nick,
